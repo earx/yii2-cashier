@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2mod\cashier;
+namespace earx\cashier;
 
 use Carbon\Carbon;
 
