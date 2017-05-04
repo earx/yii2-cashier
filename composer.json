@@ -13,13 +13,27 @@
     "authors": [
         {
             "name": "Igor Chepurnoy",
-            "email": "igorzfort@gmail.com"
+            "email": "igorzfort@gmail.com",
+            "role": "creator of original package"
+        },
+        {
+            "name": "Evgeny Bartashevich",
+            "email": "ebartashevicvh@gmail.com",
+            "role": "creator of fondy package"
         }
     ],
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/cloudipsp/ipsp-php"
+            "type": "package",
+            "package": {
+                "name": "cloudipsp/ipsp-php",
+                "version": "0.0.1",
+                "source": {
+                    "url": "https://github.com/cloudipsp/ipsp-php"
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
         }
     ],
     "require": {
