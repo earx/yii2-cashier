@@ -4,7 +4,7 @@ namespace earx\cashier;
 
 use Carbon\Carbon;
 use yii\base\Exception;
-use yii2mod\cashier\models\SubscriptionModel;
+use earx\cashier\models\SubscriptionModel;
 
 /**
  * Class SubscriptionBuilder

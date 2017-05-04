@@ -69,7 +69,7 @@ php yii migrate --migrationPath=@vendor/yii2mod/yii2-cashier/migrations
 
 Next, add the Billable trait to your User model definition:
 ```php
-use yii2mod\cashier\Billable;
+use earx\cashier\Billable;
 
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -340,7 +340,7 @@ Just add the WebhookController to the ```controllerMap``` in your configuration 
 ```php
 'controllerMap' => [
         //Stripe webhook
-        'webhook' => 'yii2mod\cashier\controllers\WebhookController',
+        'webhook' => 'earx\cashier\controllers\WebhookController',
     ],
 ```
 

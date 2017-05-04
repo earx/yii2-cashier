@@ -15,7 +15,7 @@ use Stripe\Token;
 use Yii;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii2mod\cashier\models\SubscriptionModel;
+use earx\cashier\models\SubscriptionModel;
 
 /**
  * Class Billable

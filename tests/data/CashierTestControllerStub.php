@@ -1,13 +1,13 @@
 <?php
 
-namespace yii2mod\cashier\tests\data;
+namespace earx\cashier\tests\data;
 
-use yii2mod\cashier\controllers\WebhookController;
+use earx\cashier\controllers\WebhookController;
 
 /**
  * Class CashierTestControllerStub
  *
- * @package yii2mod\cashier\tests\data
+ * @package earx\cashier\tests\data
  */
 class CashierTestControllerStub extends WebhookController
 {

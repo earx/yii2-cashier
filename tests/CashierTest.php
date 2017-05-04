@@ -1,12 +1,12 @@
 <?php
 
-namespace yii2mod\cashier\tests;
+namespace earx\cashier\tests;
 
 use Carbon\Carbon;
 use Stripe\Token;
 use Yii;
-use yii2mod\cashier\tests\data\CashierTestControllerStub;
-use yii2mod\cashier\tests\data\User;
+use earx\cashier\tests\data\CashierTestControllerStub;
+use earx\cashier\tests\data\User;
 
 class CashierTest extends TestCase
 {

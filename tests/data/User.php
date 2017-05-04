@@ -1,10 +1,10 @@
 <?php
 
-namespace yii2mod\cashier\tests\data;
+namespace earx\cashier\tests\data;
 
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use yii2mod\cashier\Billable;
+use earx\cashier\Billable;
 
 /**
  * @property int $id
