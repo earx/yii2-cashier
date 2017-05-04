@@ -29,7 +29,7 @@
                 "name": "cloudipsp/ipsp-php",
                 "version": "0.0.1",
                 "source": {
-                    "url": "https://github.com/cloudipsp/ipsp-php"
+                    "url": "https://github.com/cloudipsp/ipsp-php",
                     "type": "git",
                     "reference": "master"
                 }
