@@ -16,6 +16,12 @@
             "email": "igorzfort@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/cloudipsp/ipsp-php"
+        }
+    ],
     "require": {
         "yiisoft/yii2": ">=2.0.8",
         "yii2mod/yii2-behaviors": "*",
