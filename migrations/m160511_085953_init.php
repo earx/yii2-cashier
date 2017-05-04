@@ -20,7 +20,7 @@ class m160511_085953_init extends Migration
             'userId' => $this->integer()->notNull(),
             'name' => $this->string()->notNull(),
             'stripeId' => $this->string()->notNull(),
-            'stripePlan' => $this->string()->notNull(),
+            'plan' => $this->string()->notNull(),
             'quantity' => $this->integer()->notNull(),
             'trialEndAt' => $this->timestamp()->null(),
             'endAt' => $this->timestamp()->null(),
@@ -28,20 +28,20 @@ class m160511_085953_init extends Migration
             'updatedAt' => $this->timestamp()->null(),
         ], $tableOptions);
 
-        $this->addColumn('{{%user}}', 'stripeId', $this->string());
-        $this->addColumn('{{%user}}', 'cardBrand', $this->string());
-        $this->addColumn('{{%user}}', 'cardLastFour', $this->string());
-        $this->addColumn('{{%user}}', 'trialEndAt', $this->timestamp()->null());
+        $this->addColumn('{{%users}}', 'stripeId', $this->string());
+        $this->addColumn('{{%users}}', 'cardBrand', $this->string());
+        $this->addColumn('{{%users}}', 'cardLastFour', $this->string());
+        $this->addColumn('{{%users}}', 'trialEndAt', $this->timestamp()->null());
     }
 
     public function down()
     {
         $this->dropTable('{{%subscription}}');
 
-        $this->dropColumn('{{%user}}', 'stripeId');
-        $this->dropColumn('{{%user}}', 'cardBrand');
-        $this->dropColumn('{{%user}}', 'cardLastFour');
-        $this->dropColumn('{{%user}}', 'trialEndAt');
+        $this->dropColumn('{{%users}}', 'stripeId');
+        $this->dropColumn('{{%users}}', 'cardBrand');
+        $this->dropColumn('{{%users}}', 'cardLastFour');
+        $this->dropColumn('{{%users}}', 'trialEndAt');
     }
 
     /*
