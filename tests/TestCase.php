@@ -90,7 +90,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             'userId' => 'integer not null',
             'name' => 'string not null',
             'stripeId' => 'string not null',
-            'stripePlan' => 'string not null',
+            'plan' => 'string not null',
             'quantity' => 'integer not null',
             'trialEndAt' => 'timestamp null default null',
             'endAt' => 'timestamp null default null',

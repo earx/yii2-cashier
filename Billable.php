@@ -148,7 +148,7 @@ trait Billable
         }
 
         return $subscription && $subscription->onTrial() &&
-        $subscription->stripePlan === $plan;
+        $subscription->plan === $plan;
     }
 
     /**
@@ -180,7 +180,7 @@ trait Billable
         }
 
         return $subscription->valid() &&
-        $subscription->stripePlan === $plan;
+        $subscription->plan === $plan;
     }
 
     /**
@@ -432,7 +432,7 @@ trait Billable
         }
 
         foreach ((array)$plans as $plan) {
-            if ($subscription->stripePlan === $plan) {
+            if ($subscription->plan === $plan) {
                 return true;
             }
         }
@@ -449,7 +449,7 @@ trait Billable
      */
     public function onPlan($plan)
     {
-        $plan = $this->getSubscriptions()->where(['stripePlan' => $plan])->one();
+        $plan = $this->getSubscriptions()->where(['plan' => $plan])->one();
 
         return !is_null($plan) && $plan->valid();
     }

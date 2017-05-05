@@ -46,7 +46,7 @@ $this->createTable('subscription', [
     'userId' => $this->integer()->notNull(),
     'name' => $this->string()->notNull(),
     'stripeId' => $this->string()->notNull(),
-    'stripePlan' => $this->string()->notNull(),
+    'plan' => $this->string()->notNull(),
     'quantity' => $this->integer()->notNull(),
     'trialEndAt' => $this->timestamp()->null(),
     'endAt' => $this->timestamp()->null(),

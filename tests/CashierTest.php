@@ -79,7 +79,7 @@ class CashierTest extends TestCase
         // Swap Plan
         $subscription->swap('monthly-10-2');
 
-        $this->assertEquals('monthly-10-2', $subscription->stripePlan);
+        $this->assertEquals('monthly-10-2', $subscription->plan);
 
         // Invoice Tests
         $invoice = $user->invoices()[1];
