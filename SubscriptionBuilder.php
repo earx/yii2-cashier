@@ -168,29 +168,38 @@ class SubscriptionBuilder
      *
      * @param string|null $token
      * @param array $options
+     * @param bool $use_stripe optional. true to create stripe customer (if Stripe is used)
      *
      * @return SubscriptionModel
      *
      * @throws Exception
      */
-    public function create($token = null, array $options = [])
+    public function create($token = null, array $options = [], $use_stripe = true)
     {
-        $customer = $this->getStripeCustomer($token, $options);
-        $subscription = $customer->subscriptions->create($this->buildPayload());
+
+        if ($use_stripe) {
+
+            $customer = $this->getStripeCustomer($token, $options);
+            $subscription = $customer->subscriptions->create($this->buildPayload());
+        }
+
+
         if ($this->skipTrial) {
             $trialEndsAt = null;
         } else {
             $trialEndsAt = $this->trialDays ? Carbon::now()->addDays($this->trialDays) : null;
         }
+
         $subscriptionModel = new SubscriptionModel([
-            'userId' => $this->user->id,
-            'name' => $this->name,
-            'stripeId' => $subscription->id,
-            'stripePlan' => $this->plan,
-            'quantity' => $this->quantity,
-            'trialEndAt' => $trialEndsAt,
-            'endAt' => null,
+            'userId'        => $this->user->id,
+            'name'          => $this->name,
+            'stripeId'      => $use_stripe ? $subscription->id : 'none',
+            'plan'          => $this->plan,
+            'quantity'      => $this->quantity,
+            'trialEndAt'    => $trialEndsAt,
+            'endAt'         => null,
         ]);
+
         if ($subscriptionModel->save()) {
             return $subscriptionModel;
         } else {

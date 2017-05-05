@@ -17,7 +17,7 @@ use yii2mod\behaviors\CarbonBehavior;
  * @property int $userId
  * @property string $name
  * @property string $stripeId
- * @property string $stripePlan
+ * @property string $plan
  * @property int $quantity
  * @property Carbon $trialEndAt
  * @property Carbon $endAt
@@ -55,10 +55,10 @@ class SubscriptionModel extends ActiveRecord
     public function rules()
     {
         return [
-            [['userId', 'name', 'stripeId', 'stripePlan', 'quantity'], 'required'],
+            [['userId', 'name', 'stripeId', 'plan', 'quantity'], 'required'],
             [['userId', 'quantity'], 'integer'],
             [['trialEndAt', 'endAt'], 'safe'],
-            [['name', 'stripeId', 'stripePlan'], 'string', 'max' => 255],
+            [['name', 'stripeId', 'plan'], 'string', 'max' => 255],
         ];
     }
 
@@ -72,7 +72,7 @@ class SubscriptionModel extends ActiveRecord
             'userId' => Yii::t('app', 'User ID'),
             'name' => Yii::t('app', 'Name'),
             'stripeId' => Yii::t('app', 'Stripe ID'),
-            'stripePlan' => Yii::t('app', 'Stripe Plan'),
+            'plan' => Yii::t('app', 'Plan'),
             'quantity' => Yii::t('app', 'Quantity'),
             'trialEndAt' => Yii::t('app', 'Trial End At'),
             'endAt' => Yii::t('app', 'End At'),
@@ -307,7 +307,7 @@ class SubscriptionModel extends ActiveRecord
 
         $this->user->invoice();
 
-        $this->stripePlan = $plan;
+        $this->plan = $plan;
         $this->endAt = null;
         $this->save();
 
@@ -384,7 +384,7 @@ class SubscriptionModel extends ActiveRecord
         // To resume the subscription we need to set the plan parameter on the Stripe
         // subscription object. This will force Stripe to resume this subscription
         // where we left off. Then, we'll set the proper trial ending timestamp.
-        $subscription->plan = $this->stripePlan;
+        $subscription->plan = $this->plan;
 
         if ($this->onTrial()) {
             $subscription->trial_end = $this->trialEndAt->getTimestamp();
