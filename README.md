@@ -45,7 +45,7 @@ $this->createTable('subscription', [
     'id' => $this->primaryKey(),
     'userId' => $this->integer()->notNull(),
     'name' => $this->string()->notNull(),
-    'stripeId' => $this->string()->notNull(),
+    'token' => $this->string()->notNull(),
     'plan' => $this->string()->notNull(),
     'quantity' => $this->integer()->notNull(),
     'trialEndAt' => $this->timestamp()->null(),
@@ -54,7 +54,7 @@ $this->createTable('subscription', [
     'updatedAt' => $this->timestamp()->null()
 ], $tableOptions);
 
-$this->addColumn('user', 'stripeId', $this->string());
+$this->addColumn('user', 'token', $this->string());
 $this->addColumn('user', 'cardBrand', $this->string());
 $this->addColumn('user', 'cardLastFour', $this->string());
 $this->addColumn('user', 'trialEndAt', $this->timestamp()->null());

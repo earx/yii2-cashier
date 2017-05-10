@@ -32,7 +32,7 @@ class CashierTest extends TestCase
         $user->newSubscription('main', 'monthly-10-1')->create($this->getTestToken());
 
         $this->assertEquals(1, count($user->subscriptions));
-        $this->assertNotNull($user->subscription('main')->stripeId);
+        $this->assertNotNull($user->subscription('main')->token);
         $this->assertTrue($user->subscribed('main'));
         $this->assertTrue($user->subscribedToPlan('monthly-10-1', 'main'));
         $this->assertFalse($user->subscribedToPlan('monthly-10-1', 'something'));
@@ -181,8 +181,8 @@ class CashierTest extends TestCase
             'type' => 'customer.subscription.deleted',
             'data' => [
                 'object' => [
-                    'id' => $subscription->stripeId,
-                    'customer' => $user->stripeId,
+                    'id' => $subscription->token,
+                    'customer' => $user->token,
                 ],
             ],
         ]);

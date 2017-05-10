@@ -16,7 +16,8 @@ use yii2mod\behaviors\CarbonBehavior;
  * @property int $id
  * @property int $userId
  * @property string $name
- * @property string $stripeId
+ * @property string $token
+ * @property string $orderId
  * @property string $plan
  * @property int $quantity
  * @property Carbon $trialEndAt
@@ -55,10 +56,10 @@ class SubscriptionModel extends ActiveRecord
     public function rules()
     {
         return [
-            [['userId', 'name', 'stripeId', 'plan', 'quantity'], 'required'],
+            [['userId', 'name', 'token', 'plan', 'quantity', 'orderId'], 'required'],
             [['userId', 'quantity'], 'integer'],
             [['trialEndAt', 'endAt'], 'safe'],
-            [['name', 'stripeId', 'plan'], 'string', 'max' => 255],
+            [['name', 'token', 'plan', 'orderId'], 'string', 'max' => 255],
         ];
     }
 
@@ -71,7 +72,7 @@ class SubscriptionModel extends ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'userId' => Yii::t('app', 'User ID'),
             'name' => Yii::t('app', 'Name'),
-            'stripeId' => Yii::t('app', 'Stripe ID'),
+            'token' => Yii::t('app', 'Stripe ID'),
             'plan' => Yii::t('app', 'Plan'),
             'quantity' => Yii::t('app', 'Quantity'),
             'trialEndAt' => Yii::t('app', 'Trial End At'),
@@ -410,6 +411,6 @@ class SubscriptionModel extends ActiveRecord
      */
     public function asStripeSubscription()
     {
-        return $this->user->asStripeCustomer()->subscriptions->retrieve($this->stripeId);
+        return $this->user->asStripeCustomer()->subscriptions->retrieve($this->token);
     }
 }

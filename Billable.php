@@ -49,8 +49,8 @@ trait Billable
 
         $options['amount'] = $amount;
 
-        if (!array_key_exists('source', $options) && $this->stripeId) {
-            $options['customer'] = $this->stripeId;
+        if (!array_key_exists('source', $options) && $this->token) {
+            $options['customer'] = $this->token;
         }
 
         if (!array_key_exists('source', $options) && !array_key_exists('customer', $options)) {
@@ -98,12 +98,12 @@ trait Billable
      */
     public function invoiceFor($description, $amount, array $options = [])
     {
-        if (!$this->stripeId) {
+        if (!$this->token) {
             throw new InvalidArgumentException('User is not a customer. See the createAsStripeCustomer method.');
         }
 
         $options = array_merge([
-            'customer' => $this->stripeId,
+            'customer' => $this->token,
             'amount' => $amount,
             'currency' => $this->preferredCurrency(),
             'description' => $description,
@@ -210,9 +210,9 @@ trait Billable
      */
     public function invoice()
     {
-        if ($this->stripeId) {
+        if ($this->token) {
             try {
-                return StripeInvoice::create(['customer' => $this->stripeId], $this->getStripeKey())->pay();
+                return StripeInvoice::create(['customer' => $this->token], $this->getStripeKey())->pay();
             } catch (InvalidRequest $e) {
                 return false;
             }
@@ -230,7 +230,7 @@ trait Billable
     {
         try {
             $stripeInvoice = StripeInvoice::upcoming(
-                ['customer' => $this->stripeId], ['api_key' => $this->getStripeKey()]
+                ['customer' => $this->token], ['api_key' => $this->getStripeKey()]
             );
 
             return new Invoice($this, $stripeInvoice);
@@ -461,7 +461,7 @@ trait Billable
      */
     public function hasStripeId()
     {
-        return !is_null($this->stripeId);
+        return !is_null($this->token);
     }
 
     /**
@@ -482,7 +482,7 @@ trait Billable
         // and allow us to retrieve users from Stripe later when we need to work.
         $customer = Customer::create($options, $this->getStripeKey());
 
-        $this->stripeId = $customer->id;
+        $this->token = $customer->id;
 
         $this->save();
 
@@ -503,7 +503,7 @@ trait Billable
      */
     public function asStripeCustomer()
     {
-        return Customer::retrieve($this->stripeId, $this->getStripeKey());
+        return Customer::retrieve($this->token, $this->getStripeKey());
     }
 
     /**

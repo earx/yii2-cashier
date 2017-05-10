@@ -193,7 +193,8 @@ class SubscriptionBuilder
         $subscriptionModel = new SubscriptionModel([
             'userId'        => $this->user->id,
             'name'          => $this->name,
-            'stripeId'      => $use_stripe ? $subscription->id : 'none',
+            'token'         => $use_stripe ? $subscription->id : 'none',
+            'orderId'       => md5($this->user->id.$this->name.time()),
             'plan'          => $this->plan,
             'quantity'      => $this->quantity,
             'trialEndAt'    => $trialEndsAt,
@@ -217,7 +218,7 @@ class SubscriptionBuilder
      */
     protected function getStripeCustomer($token = null, array $options = [])
     {
-        if (!$this->user->stripeId) {
+        if (!$this->user->token) {
             $customer = $this->user->createAsStripeCustomer(
                 $token, array_merge($options, array_filter(['coupon' => $this->coupon]))
             );

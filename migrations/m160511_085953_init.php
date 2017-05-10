@@ -19,7 +19,7 @@ class m160511_085953_init extends Migration
             'id' => $this->primaryKey(),
             'userId' => $this->integer()->notNull(),
             'name' => $this->string()->notNull(),
-            'stripeId' => $this->string()->notNull(),
+            'token' => $this->string()->notNull(),
             'plan' => $this->string()->notNull(),
             'quantity' => $this->integer()->notNull(),
             'trialEndAt' => $this->timestamp()->null(),
@@ -28,7 +28,7 @@ class m160511_085953_init extends Migration
             'updatedAt' => $this->timestamp()->null(),
         ], $tableOptions);
 
-        $this->addColumn('{{%users}}', 'stripeId', $this->string());
+        $this->addColumn('{{%users}}', 'token', $this->string());
         $this->addColumn('{{%users}}', 'cardBrand', $this->string());
         $this->addColumn('{{%users}}', 'cardLastFour', $this->string());
         $this->addColumn('{{%users}}', 'trialEndAt', $this->timestamp()->null());
@@ -38,7 +38,7 @@ class m160511_085953_init extends Migration
     {
         $this->dropTable('{{%subscription}}');
 
-        $this->dropColumn('{{%users}}', 'stripeId');
+        $this->dropColumn('{{%users}}', 'token');
         $this->dropColumn('{{%users}}', 'cardBrand');
         $this->dropColumn('{{%users}}', 'cardLastFour');
         $this->dropColumn('{{%users}}', 'trialEndAt');

@@ -71,7 +71,7 @@ class WebhookController extends Controller
             $subscriptions = $user->getSubscriptions()->all();
             /* @var $subscription SubscriptionModel */
             foreach ($subscriptions as $subscription) {
-                if ($subscription->stripeId === $payload['data']['object']['id']) {
+                if ($subscription->token === $payload['data']['object']['id']) {
                     $subscription->markAsCancelled();
                 }
             }
@@ -86,15 +86,15 @@ class WebhookController extends Controller
     /**
      * Get the billable entity instance by Stripe ID.
      *
-     * @param string $stripeId
+     * @param string $token
      *
      * @return null|static
      */
-    protected function getUserByStripeId($stripeId)
+    protected function getUserByStripeId($token)
     {
         $model = Yii::$app->user->identityClass;
 
-        return $model::findOne(['stripeId' => $stripeId]);
+        return $model::findOne(['token' => $token]);
     }
 
     /**
