@@ -104,6 +104,7 @@ class SubscriptionModel extends ActiveRecord
                 'class' => CarbonBehavior::className(),
                 'attributes' => [
                     'trialEndAt',
+                    'tokenEndAt',
                     'endAt',
                 ],
             ],
