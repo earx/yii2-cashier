@@ -58,7 +58,7 @@ class SubscriptionModel extends ActiveRecord
         return [
             [['userId', 'name', 'token', 'plan', 'quantity', 'orderId'], 'required'],
             [['userId', 'quantity'], 'integer'],
-            [['trialEndAt', 'endAt'], 'safe'],
+            [['trialEndAt', 'endAt',"tokenEndAt"], 'safe'],
             [['name', 'token', 'plan', 'orderId'], 'string', 'max' => 255],
         ];
     }
@@ -71,11 +71,13 @@ class SubscriptionModel extends ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'userId' => Yii::t('app', 'User ID'),
+            'orderId' => Yii::t('app', 'Order ID'),
             'name' => Yii::t('app', 'Name'),
-            'token' => Yii::t('app', 'Stripe ID'),
+            'token' => Yii::t('app', 'Token'),
             'plan' => Yii::t('app', 'Plan'),
             'quantity' => Yii::t('app', 'Quantity'),
             'trialEndAt' => Yii::t('app', 'Trial End At'),
+            'tokenEndAt' => Yii::t('app', 'Token End At'),
             'endAt' => Yii::t('app', 'End At'),
             'createdAt' => Yii::t('app', 'Created At'),
             'updatedAt' => Yii::t('app', 'Updated At'),
